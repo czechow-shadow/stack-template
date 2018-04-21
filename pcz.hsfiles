@@ -34,6 +34,7 @@ library
                      , FlexibleInstances
                      , MultiParamTypeClasses
                      , TypeApplications
+                     , FlexibleContexts
 
 executable {{name}}
   hs-source-dirs:      app
@@ -53,6 +54,7 @@ executable {{name}}
                      , FlexibleInstances
                      , MultiParamTypeClasses
                      , TypeApplications
+                     , FlexibleContexts
 
 test-suite {{name}}-test
   type:                exitcode-stdio-1.0
@@ -73,6 +75,7 @@ test-suite {{name}}-test
                      , FlexibleInstances
                      , MultiParamTypeClasses
                      , TypeApplications
+                     , FlexibleContexts
 
 source-repository head
   type:     git
