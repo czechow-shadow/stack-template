@@ -163,8 +163,9 @@ cradle:
               component: "{{name}}:test:{{name}}-test"
 
 {-# START_FILE .gitignore #-}
-.gitignore
 .stack-work
+TAGS
+stack.yaml.lock
 
 {-# START_FILE .projectile #-}
 {-# START_FILE LICENSE #-}
