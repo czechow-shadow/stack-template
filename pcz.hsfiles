@@ -86,8 +86,10 @@ import Distribution.Simple
 main = defaultMain
 
 {-# START_FILE test/Spec.hs #-}
+import Protolude
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = putText "Test suite not yet implemented"
 
 {-# START_FILE src/Lib.hs #-}
 module Lib where
@@ -132,13 +134,39 @@ main :: IO ()
 main = putText "Up and running"
 
 
+{-# START_FILE .ghcid #-}
+--command="stack repl {{name}}:lib {{name}}:exe:{{name}}" --restart {{name}}.cabal --restart .ghcid
 {-# START_FILE .dir-locals.el #-}
 ;;; Directory Local Variables
 ;;; For more information see (info "(emacs) Directory Variables")
 
 ((haskell-mode
-  (projectile-tags-command . "find src app -type f | grep hs$ | xargs hasktags -e")))
+  (projectile-tags-command . "find src app -type f | grep hs$ | xargs hasktags -e")
+  ))
 
+{-# START_FILE hie.yaml #-}
+cradle:
+  multi:
+    - path: "Setup.hs"
+      config:
+        cradle:
+          none:
+    - path: "./"
+      config:
+        cradle:
+          stack:
+            - path: "./src"
+              component: "{{name}}:lib"
+            - path: "./app"
+              component: "{{name}}:exe:{{name}}"
+            - path: "./test"
+              component: "{{name}}:test:{{name}}-test"
+
+{-# START_FILE .gitignore #-}
+.gitignore
+.stack-work
+
+{-# START_FILE .projectile #-}
 {-# START_FILE LICENSE #-}
 Copyright {{author-name}}{{^author-name}}Author name here{{/author-name}} (c) {{year}}{{^year}}2018{{/year}}
 
@@ -173,4 +201,4 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {-# START_FILE README.md #-}
 # {{name}}
 
-add description of {{name}} here
+Add description of {{name}} here
